@@ -6,7 +6,7 @@ import com.ecommerce.productapi.model.Product;
 import com.ecommerce.productapi.model.ProductStatus;
 import com.ecommerce.productapi.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,11 +16,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ProductService {
 
     private final ProductRepository productRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public ProductResponse createProduct(ProductRequest request) {
         Product product = mapToEntity(request);
@@ -89,7 +93,6 @@ public class ProductService {
         return productRepository.findDistinctCategoryBy();
     }
 
-    // --- Mapper Methods ---
     private Product mapToEntity(ProductRequest req) {
         return Product.builder()
                 .name(req.getName())
