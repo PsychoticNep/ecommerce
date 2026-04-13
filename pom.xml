@@ -54,8 +54,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <jvmArguments>-Dspring.output.ansi.enabled=ALWAYS</jvmArguments>
-                    <fork>true</fork>
-                </configuration>
+                                    </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
